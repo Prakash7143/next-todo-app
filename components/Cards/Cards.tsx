@@ -45,7 +45,7 @@ const Cards = () => {
                             {todo.createdDate}
                         </Typography>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" >
-                            <Tooltip title="Date Ending">
+                            <Tooltip title="Due Date-Time">
                                 <IconButton color="primary" size="small">
                                     <CalendarMonthSharpIcon/> 
                                 </IconButton>
