@@ -13,13 +13,9 @@ export const mainContext = () => {
 }
 
 const MainContext =  ({ children }:MainContextProviderProps ) => {
-    
-    const [user, setUser] = useState("Satya");
     const [todoList, setTodoList] = useState([]);
 
     const store = {
-        user,
-        setUser,
         todoList,
         setTodoList
     }

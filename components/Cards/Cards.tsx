@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import AccessTimeSharpIcon from '@mui/icons-material/AccessTimeSharp';
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
 
@@ -14,19 +14,31 @@ import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import { mainContext } from '../../store/context';
 import type { todoItemProps } from '../Form/Form';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import LinearProgress from '@mui/material/LinearProgress';
+import Box from '@mui/material/Box';
 
 const Cards = () => {
     const { todoList, setTodoList }= mainContext();
-    
+    const [initialLoad, setInitialLoad] = useState<boolean>(true);
+
+    useEffect(() => {
+        setInitialLoad(false);
+    }, []);
+
     const deleteTodo = (id:Number) => {
         setTodoList(todoList.filter((todo:todoItemProps) => todo.id !== id))
-        localStorage.setItem("todoList", JSON.stringify(todoList));
     }
+    useLocalStorage(todoList);
 
     return (
         <div
          className='cards-container'
         >
+            {initialLoad && (<Box sx={{ width: '100%' }}>
+                <LinearProgress />
+            </Box>)}
+    
             { todoList.length !== 0 && (todoList?.map((todo:any) => (
                 <Card key={todo.id} sx={{ minWidth: 275, maxWidth: 300 }}>
                     <CardContent>

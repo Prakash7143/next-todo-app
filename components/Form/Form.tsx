@@ -8,6 +8,7 @@ import TextField from '@mui/material/TextField';
 import dayjs, { Dayjs } from 'dayjs';
 import { Button } from '@mui/material';
 import { mainContext } from '../../store/context';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 
 export interface todoItemProps {
@@ -36,9 +37,6 @@ const Form = () => {
     setDeadLineDate(newValue);
   };
  
-
-
-
   const addToDoList = () => {
     
     if(itemName === "") {
@@ -52,12 +50,9 @@ const Form = () => {
       }
     setTodoList((todoList:any) => [...todoList, newData])
     setItemName("");
-
   }
 
-  const saveTodo = () => {
-    localStorage.setItem("todoList", JSON.stringify(todoList));
-  }
+  useLocalStorage(todoList);
 
   return (
     <Stack 
@@ -88,12 +83,6 @@ const Form = () => {
           variant="contained"
         >
             Add To Do
-        </Button>
-        <Button
-          onClick={saveTodo}
-          variant="outlined"
-        >
-            Save
         </Button>
     
     </Stack>
